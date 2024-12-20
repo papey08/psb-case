@@ -16,6 +16,8 @@ class Repository:
             print(f"Ошибка подключения к базе данных: {e}")
             raise
     def get_next_response_in_category(self, category: str, current_id: int):
+        if not self.is_category_exist(category):
+            return None
         with self.connection.cursor() as cursor:
             cursor.execute(Query_Constants.next_category_qwery(category), (current_id,))
             row = cursor.fetchone()
@@ -26,6 +28,8 @@ class Repository:
                     resp_category=category,
                     current_index=row[0]
                 )
+    def is_category_exist(self, category: str):
+        return (category == 'claim') or (category == 'suggestion') or (category =='gratitude')
 
 
 class Query_Constants:
