@@ -29,8 +29,6 @@ class Repository:
                 )
 
 
-
-
 class Query_Constants:
     @staticmethod
     def next_category_qwery(category: str):
@@ -39,25 +37,3 @@ class Query_Constants:
         FROM {category}_v c
         WHERE c.id = %s LIMIT 1
         """
-    @staticmethod
-    def category_qwery(category: str):
-        return f"""
-        SELECT c.*
-        FROM {category}_v c
-        WHERE c.response_id = %s LIMIT 1
-        """
-    @staticmethod
-    def update_category_qwery():
-        return """UPDATE responses SET
-        resp_category = %s,
-        WHERE id = %s returning id
-        """
-
-if __name__ == '__main__':
-    db = Repository('localhost',
-                    5501,
-                    'root',
-                    'root',
-                    'psb-case')
-    res=db.get_next_category('gratitude',0)
-    print(res)
