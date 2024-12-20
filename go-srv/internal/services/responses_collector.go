@@ -1,4 +1,4 @@
-package service
+package services
 
 import (
 	"context"
@@ -10,12 +10,19 @@ import (
 	"time"
 )
 
-type Service struct {
+type ResponsesCollector struct {
 	classifierCli *classifier_client.ClassifierCli
 	repo          *repo.Repo
 }
 
-func (s *Service) Run(ctx context.Context, firstId int, amount int) {
+func NewResponsesCollector(classifier *classifier_client.ClassifierCli, repo *repo.Repo) *ResponsesCollector {
+	return &ResponsesCollector{
+		classifierCli: classifier,
+		repo:          repo,
+	}
+}
+
+func (s *ResponsesCollector) Run(ctx context.Context, firstId int, amount int) {
 	for {
 		responsesTexts, err := htmlparser.Parse(firstId, amount)
 		if err != nil {
