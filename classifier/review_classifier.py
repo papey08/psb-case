@@ -12,33 +12,43 @@ import joblib
 # Установите ваш API-ключ
 openai.api_key = "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"  # Замените на ваш реальный API-ключ
 
-categories = ["Претензия", "Благодарность", "Предложение"]
+category = ["Претензия", "Благодарность", "Предложение"]
+
 
 # Функция для классификации отзыва
-def classify_review(review_text):
+def classify_review_openai(review_text):
     prompt = f"""
     Ты - экспертный классификатор отзывов. Ответь одним словом на основе текста:
     Классифицируй текст отзыва на одну из категорий: "Претензия", "Благодарность", "Предложение".
     Текст: {review_text}
-    Ответи только одним словом: "Претензия", "Благодарность" или "Предложение".
+    Ответь только одним словом: "Претензия", "Благодарность" или "Предложение".
     """
-    
+
     try:
         # Отправка запроса к ChatGPT
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",  # Или "gpt-4" 
+            model="gpt-3.5-turbo",  # Или "gpt-4"
             messages=[
                 {"role": "system", "content": "Ты помощник, классифицирующий текст."},
                 {"role": "user", "content": prompt}
             ]
         )
-        
+
         # Извлечение ответа
         answer = response["choices"][0]["message"]["content"].strip()
+        if answer == "Благодарность":
+            answer = "gratitude"
+        if answer == "Предложение":
+            answer = "suggestion"
+        if answer == "Претензия":
+            answer = "claim"
+        else:
+            return None
         return answer
     except Exception as e:
         print(f"Ошибка: {e}")
         return None
+
 
 # Функция преобразования текста в вектор
 def get_text_vector(text, model):
@@ -48,6 +58,7 @@ def get_text_vector(text, model):
     if len(vectors) == 0:
         return np.zeros(model.vector_size)
     return np.mean(vectors, axis=0)
+
 
 class ReviewClassifier:
     def __init__(self, keywords_file):
@@ -84,9 +95,12 @@ class ReviewClassifier:
         else:
             # Если совпадений не найдено или категории равны
             # Добавить вызов predict нейронки тут:
-            
-            category = classify_review(review_text)
-            print(f"Категория отзыва: {category}")
+
+            category = classify_review_openai(review_text)
+
+            if category != None:
+                return category
+
             if category == None:
                 classifier = joblib.load('classifier.pkl')
                 word2vec_model = joblib.load('word2vec_model.pkl')
@@ -94,7 +108,13 @@ class ReviewClassifier:
                 review_vector = get_text_vector(tokenized_review, word2vec_model)
 
                 predicted_category = classifier.predict([review_vector])[0]
-                print(f"Категория: {categories[predicted_category]}")
+
+                if predicted_category == 0:
+                    return 'claim'
+                elif predicted_category == 1:
+                    return 'gratitude'
+                elif predicted_category == 2:
+                    return 'suggestion'
 
 '''
 # Пример использования класса
@@ -102,9 +122,10 @@ classifier = ReviewClassifier('keywords.json')
 
 # Пример текста отзыва
 # review_text = "Этот продукт просто чудо! Я в восторге!"
-review_text = "отвратительный банк"
+# review_text = "отвратительный банк"
 
 import pandas as pd
+
 data = pd.read_csv("отзывы - Sheet1.csv")
 reviews = data['заголовок отзыва'].tolist()
 
