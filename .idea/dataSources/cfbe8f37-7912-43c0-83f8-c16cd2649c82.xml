@@ -3,9 +3,17 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.52">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>746</IntrospectionStateNumber>
+      <Grants>1||-9223372036854775808|c|G
+1||10|c|G
+1||10|C|G
+1||10|T|G
+4||-9223372036854775808|c|G
+4||10|c|G
+4||10|C|G
+4||10|T|G</Grants>
+      <IntrospectionStateNumber>758</IntrospectionStateNumber>
       <ServerVersion>15.5</ServerVersion>
-      <StartupTime>1734707116</StartupTime>
+      <StartupTime>1734718897</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -1404,7 +1412,7 @@ false posixrules
 13209||10|C|G
 13209||-9223372036854775808|U|G
 13209||10|U|G</Grants>
-      <IntrospectionStateNumber>746</IntrospectionStateNumber>
+      <IntrospectionStateNumber>758</IntrospectionStateNumber>
       <ObjectId>16384</ObjectId>
       <OwnerName>root</OwnerName>
     </database>
@@ -4817,8 +4825,8 @@ false posixrules
     <schema id="262" parent="3" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>746</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-12-20.16:41:58</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>758</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-12-20.21:32:06</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>518</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4843,74 +4851,60 @@ claim</Labels>
       <LanguageName>plpgsql</LanguageName>
       <OwnerName>root</OwnerName>
     </routine>
-    <sequence id="265" parent="262" name="tg_user_id_seq">
-      <DasType>integer|0s</DasType>
-      <ObjectId>16401</ObjectId>
-      <SequenceIdentity>1</SequenceIdentity>
-      <StartValue>1</StartValue>
-      <StateNumber>728</StateNumber>
-      <OwnerName>root</OwnerName>
-    </sequence>
-    <table id="266" parent="262" name="responses">
+    <table id="265" parent="262" name="responses">
       <ObjectId>16393</ObjectId>
       <StateNumber>730</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>root</OwnerName>
     </table>
-    <table id="267" parent="262" name="tg_user">
-      <ObjectId>16402</ObjectId>
-      <StateNumber>728</StateNumber>
-      <AccessMethodId>2</AccessMethodId>
-      <OwnerName>root</OwnerName>
-    </table>
-    <view id="268" parent="262" name="claim_v">
+    <view id="266" parent="262" name="claim_v">
       <ObjectId>16423</ObjectId>
       <SourceTextLength>194</SourceTextLength>
       <StateNumber>733</StateNumber>
       <OwnerName>root</OwnerName>
     </view>
-    <view id="269" parent="262" name="gratitude_v">
+    <view id="267" parent="262" name="gratitude_v">
       <ObjectId>16415</ObjectId>
       <SourceTextLength>198</SourceTextLength>
       <StateNumber>731</StateNumber>
       <OwnerName>root</OwnerName>
     </view>
-    <view id="270" parent="262" name="suggestion_v">
+    <view id="268" parent="262" name="suggestion_v">
       <ObjectId>16419</ObjectId>
       <SourceTextLength>199</SourceTextLength>
       <StateNumber>732</StateNumber>
       <OwnerName>root</OwnerName>
     </view>
-    <argument id="271" parent="264">
+    <argument id="269" parent="264">
       <ArgumentDirection>R</ArgumentDirection>
       <DasType>trigger|0s</DasType>
     </argument>
-    <column id="272" parent="266" name="id">
+    <column id="270" parent="265" name="id">
       <DasType>bigint|0s</DasType>
       <Position>1</Position>
       <StateNumber>727</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="273" parent="266" name="original_text">
+    <column id="271" parent="265" name="original_text">
       <DasType>text|0s</DasType>
       <Position>2</Position>
       <StateNumber>727</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="274" parent="266" name="resp_category">
+    <column id="272" parent="265" name="resp_category">
       <DasType>category|0s</DasType>
       <Position>3</Position>
       <StateNumber>727</StateNumber>
       <TypeId>16386</TypeId>
     </column>
-    <column id="275" parent="266" name="updated_at">
+    <column id="273" parent="265" name="updated_at">
       <DasType>timestamp|0s</DasType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <Position>4</Position>
       <StateNumber>727</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <index id="276" parent="266" name="responses_id_key">
+    <index id="274" parent="265" name="responses_id_key">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16399</ObjectId>
@@ -4918,129 +4912,60 @@ claim</Labels>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="277" parent="266" name="responses_id_key">
+    <key id="275" parent="265" name="responses_id_key">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16400</ObjectId>
       <StateNumber>727</StateNumber>
       <UnderlyingIndexId>16399</UnderlyingIndexId>
     </key>
-    <trigger id="278" parent="266" name="set_updated_at">
+    <trigger id="276" parent="265" name="set_updated_at">
       <Events>U</Events>
       <ObjectId>16414</ObjectId>
       <StateNumber>730</StateNumber>
       <Turn>before-row</Turn>
       <CallRoutineId>16413</CallRoutineId>
     </trigger>
-    <column id="279" parent="267" name="id">
-      <DasType>integer|0s</DasType>
-      <DefaultExpression>nextval(&apos;tg_user_id_seq&apos;::regclass)</DefaultExpression>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StateNumber>728</StateNumber>
-      <SequenceId>16401</SequenceId>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="280" parent="267" name="tg_username">
-      <DasType>varchar(256)|0s</DasType>
-      <Position>2</Position>
-      <StateNumber>728</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="281" parent="267" name="gratitude_id">
-      <DasType>integer|0s</DasType>
-      <DefaultExpression>0</DefaultExpression>
-      <Position>3</Position>
-      <StateNumber>728</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="282" parent="267" name="suggestion_id">
-      <DasType>integer|0s</DasType>
-      <DefaultExpression>0</DefaultExpression>
-      <Position>4</Position>
-      <StateNumber>728</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="283" parent="267" name="claim_id">
-      <DasType>integer|0s</DasType>
-      <DefaultExpression>0</DefaultExpression>
-      <Position>5</Position>
-      <StateNumber>728</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <index id="284" parent="267" name="tg_user_pkey">
-      <ColNames>id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16409</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>728</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-    </index>
-    <index id="285" parent="267" name="tg_user_tg_username_key">
-      <ColNames>tg_username</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16411</ObjectId>
-      <StateNumber>728</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-      <CollationNames>default</CollationNames>
-      <CollationIds>100</CollationIds>
-      <CollationParentNames>pg_catalog</CollationParentNames>
-    </index>
-    <key id="286" parent="267" name="tg_user_pkey">
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16410</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>728</StateNumber>
-      <UnderlyingIndexId>16409</UnderlyingIndexId>
-    </key>
-    <key id="287" parent="267" name="tg_user_tg_username_key">
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16412</ObjectId>
-      <StateNumber>728</StateNumber>
-      <UnderlyingIndexId>16411</UnderlyingIndexId>
-    </key>
-    <column id="288" parent="268" name="id">
+    <column id="277" parent="266" name="id">
       <DasType>bigint|0s</DasType>
       <Position>1</Position>
       <StateNumber>733</StateNumber>
     </column>
-    <column id="289" parent="268" name="original_text">
+    <column id="278" parent="266" name="original_text">
       <DasType>text|0s</DasType>
       <Position>2</Position>
       <StateNumber>733</StateNumber>
     </column>
-    <column id="290" parent="268" name="response_id">
+    <column id="279" parent="266" name="response_id">
       <DasType>bigint|0s</DasType>
       <Position>3</Position>
       <StateNumber>733</StateNumber>
     </column>
-    <column id="291" parent="269" name="id">
+    <column id="280" parent="267" name="id">
       <DasType>bigint|0s</DasType>
       <Position>1</Position>
       <StateNumber>731</StateNumber>
     </column>
-    <column id="292" parent="269" name="original_text">
+    <column id="281" parent="267" name="original_text">
       <DasType>text|0s</DasType>
       <Position>2</Position>
       <StateNumber>731</StateNumber>
     </column>
-    <column id="293" parent="269" name="response_id">
+    <column id="282" parent="267" name="response_id">
       <DasType>bigint|0s</DasType>
       <Position>3</Position>
       <StateNumber>731</StateNumber>
     </column>
-    <column id="294" parent="270" name="id">
+    <column id="283" parent="268" name="id">
       <DasType>bigint|0s</DasType>
       <Position>1</Position>
       <StateNumber>732</StateNumber>
     </column>
-    <column id="295" parent="270" name="original_text">
+    <column id="284" parent="268" name="original_text">
       <DasType>text|0s</DasType>
       <Position>2</Position>
       <StateNumber>732</StateNumber>
     </column>
-    <column id="296" parent="270" name="response_id">
+    <column id="285" parent="268" name="response_id">
       <DasType>bigint|0s</DasType>
       <Position>3</Position>
       <StateNumber>732</StateNumber>
