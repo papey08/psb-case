@@ -2,11 +2,13 @@ from concurrent import futures
 import grpc
 import classifier_pb2
 import classifier_pb2_grpc
+import review_classifier
 
 class ParserServiceServicer(classifier_pb2_grpc.ProtoServiceServicer):
     def Predict(self, request, context):
         text = request.original_text
-        category = 'gratitude' # todo сделать получение категории парсером/нейронкой
+        classifier = review_classifier.ReviewClassifier('keywords.json')
+        category = classifier.classify_review(text)
         return classifier_pb2.Response(category)
 
 def serve():
