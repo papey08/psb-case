@@ -1,6 +1,5 @@
 import psycopg2
 from entitties.response import Response
-from entitties.tg_user import TgUser
 
 class Repository:
     def __init__(self, db_host, db_port, db_username, db_password, db_database_name):
